@@ -20,6 +20,9 @@
   },
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --pretty --sourceMap --watch",
