@@ -1,0 +1,41 @@
+name: Feature Suggestion
+description: Suggest a feature
+labels: [ "Type: Feature" ]
+
+body:
+  - type: checkboxes
+    attributes:
+      label: Is your suggestion unique?
+      description: Please search to see if the feature in your suggestion already exists.
+      options:
+        - label: I confirm that my suggestion is unique
+          required: false
+
+  - type: textarea
+    attributes:
+      label: Describe your suggestion
+      description: Tell us about your suggestion!
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Motive
+      description: Tell us the motive behind your suggestion
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Use cases
+      description: Describe any real-time uses for your suggestion
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Anything else you want to tell us?
+      description: |
+        You may include links and references that will give us more context about your suggestion.
+    validations:
+      required: false

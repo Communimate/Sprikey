@@ -1,0 +1,51 @@
+# Type
+- name: "Type: Bug"
+  description: Something isn't working
+  color: "e11d21"
+- name: "Type: Enhancement"
+  description: Make an existing feature better
+  color: "fbca04"
+- name: "Type: Maintenance"
+  color: "84b6eb"
+- name: "Type: Question"
+  description: I need to ask something
+  color: "cc317c"
+
+# Priority
+- name: "Priority: Critical"
+  color: "e11d21"
+- name: "Priority: High"
+  color: "eb6420"
+- name: "Priority: Medium"
+  color: "fbca04"
+- name: "Priority: Low"
+  color: "009800"
+
+# Status
+- name: "Status: Stale"
+  description: Inactive or abandoned
+  color: "000000"
+- name: "Status: Approved"
+  description: Can start developing
+  color: "009800"
+- name: "Status: Available"
+  description: Needs attention
+  color: "bfe5bf"
+- name: "Status: Blocked"
+  color: "e11d21"
+- name: "Status: Completed"
+  description: This has been implemented
+  color: "006b75"
+- name: "Status: In Progress"
+  description: Someone is working on it
+  color: "cccccc"
+- name: "Status: On Hold"
+  description: Need to check something first
+  color: "e11d21"
+- name: "Status: Pending"
+  description: Needs contributions
+  color: "fef2c0"
+- name: "Status: Review Needed"
+  color: "fbca04"
+- name: "Status: Revision Needed"
+  color: "e11d21"

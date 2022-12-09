@@ -1,0 +1,55 @@
+name: Bug Report
+description: Report a bug
+labels: [ Bug, Investigation required ]
+
+body:
+  - type: checkboxes
+    attributes:
+      label: Is your issue unique?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I confirm that my issue is unique
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Describe the bug you encountered
+      description: Tell us all we need to know about the bug!
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Tell us the steps we need to follow to get as close as possible to the bug you encounteted.
+      placeholder: |
+        1.
+        2.
+        3.
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Specifications
+      description: |
+        Examples:
+          - **Project version:** 1.0.0
+          - **Node.js version:** 14.15.4
+          - **Operating System:** Ubuntu-20.04 (x86_64)
+      value: |
+        - Project version:
+        - Node.js version:
+        - Operating System:
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Anything else you want to tell us?
+      description: |
+        You may include links and references that will give us more context about your issue.
+    validations:
+      required: false

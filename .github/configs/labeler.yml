@@ -1,0 +1,28 @@
+"Target: Repository":
+- any: [
+  "README*",
+  "LICENSE*",
+  ".gitignore",
+  ".gitattributes",
+  ".github/**/*"
+]
+
+"Target: Documentation":
+- docs/**/*
+
+"Target: Configuration":
+- any: [
+  "package.js*",
+  "pnpm-lock.yaml",
+  "package-lock.json",
+  "tsconfig.*",
+  ".eslintrc.*",
+  ".eslint/**/*",
+  ".husky/**/*"
+]
+
+"Target: Test":
+- any: [ "tests/**/*", src/**/*.test.* ]
+
+"Target: Source":
+- src/**/*

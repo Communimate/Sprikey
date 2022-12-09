@@ -1,0 +1,32 @@
+name: Lint Commit
+on: [ pull_request ]
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    name: Check commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Prepare pnpm
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint commit message
+        run: pnpm run lint:commit
+

@@ -1,0 +1,44 @@
+{
+  "rules": {
+    "body-case": [ 2, "always", "sentence-case" ],
+    "body-full-stop": [ 2, "never", "." ],
+    "body-leading-blank": [ 2, "always" ],
+    "body-empty": [ 0, "never" ],
+    "body-max-length": [ 2, "always", 720 ],
+    "body-max-line-length": [ 2, "always", 72 ],
+    "body-min-length": [ 2, "always", 10 ],
+    "footer-leading-blank": [ 2, "always" ],
+    "footer-empty": [ 0 ],
+    "footer-max-length": [ 2, "always", 360 ],
+    "footer-max-line-length": [ 2, "always", 72 ],
+    "footer-min-length": [ 2, "always", 0 ],
+    "header-case": [ 0, "always", "lower-case" ],
+    "header-full-stop": [ 2, "never", "." ],
+    "header-max-length": [ 2, "always", 72 ],
+    "header-min-length": [ 2, "always", 20 ],
+    "references-empty": [ 0 ],
+    "scope-enum": [ 0, "always", [
+      "compiler", "git", "deps", "lint", "scripts", "repo", "src"
+    ] ],
+    "scope-case": [ 0, "always", "kebab-case" ],
+    "scope-empty": [ 0 ],
+    "scope-max-length": [ 2, "always", 10 ],
+    "scope-min-length": [ 2, "always", 0 ],
+    "subject-case": [ 0, "always", "lower-case" ],
+    "subject-full-stop": [ 2, "never", "." ],
+    "subject-empty": [ 2, "never" ],
+    "subject-max-length": [ 2, "always", 56 ],
+    "subject-min-length": [ 0, "always", 10 ],
+    "subject-exclamation-mark": [ 2, "never" ],
+    "type-enum": [ 2, "always", [ 
+      "feat", "fix",  "docs", "style", "refactor", "test",
+      "revert", "ci", "perf", "build", "chore"
+    ] ],
+    "type-case": [ 2, "always", "lower-case" ],
+    "type-empty": [ 2, "never" ],
+    "type-max-length": [ 2, "always", 8 ],
+    "type-min-length": [ 0, "always", 2 ],
+    "signed-off-by": [ 0 ],
+    "trailer-exists": [ 0 ]  
+  }
+}
