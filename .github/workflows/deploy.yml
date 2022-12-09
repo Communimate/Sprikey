@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check Branch
-      run: echo "${{ github.base_ref }} https://github.com/${{ github.repository }}.git"
-
     - name: Deploy
       uses: wei/git-sync@v1
       env:
         SOURCE_REPO: "https://github.com/${{ github.repository }}.git"
-        SOURCE_BRANCH: "dev"
+        SOURCE_BRANCH: "${{ github.base_ref }}"
         DESTINATION_REPO: ${{ secrets.SPRIKEYDEV_GIT_URL }}
         DESTINATION_BRANCH: "master"
       with:
