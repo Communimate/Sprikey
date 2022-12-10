@@ -34,11 +34,11 @@ const listenerType: Record<ClientListenerNames | InteractionListenerNames, "clie
 };
 
 abstract class BaseHandler<ListenerName extends ListenerNames> {
-  #listenerName: ListenerName;
-  #listenerDirectory: string;
   readonly bot: SprikeyBot;
   readonly emitter: BaseEventEmitter = new EventEmitter();
   readonly listeners = new Map<string, ListenerStructures[ListenerName]>();
+  #listenerName: ListenerName;
+  #listenerDirectory: string;
 
   constructor(bot: SprikeyBot, listenerToHandle: ListenerName) {
     const listenerTypeDirectory = `dist/listeners/${listenerType[listenerToHandle]}`;
