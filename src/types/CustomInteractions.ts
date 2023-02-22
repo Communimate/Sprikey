@@ -1,6 +1,6 @@
 import type {
-  ButtonInteraction, ChatInputCommandInteraction, Interaction, MessageContextMenuCommandInteraction, ModalSubmitInteraction,
-  SelectMenuInteraction, UserContextMenuCommandInteraction
+  ButtonInteraction, ChatInputCommandInteraction, Interaction, MessageContextMenuCommandInteraction,
+  AnySelectMenuInteraction, ModalSubmitInteraction, UserContextMenuCommandInteraction
 } from "discord.js";
 import type { SetNonNullable } from "type-fest";
 
@@ -25,10 +25,10 @@ export type PickMessageContextMenuInteraction<AllowedInDMs extends boolean> = Al
   ? MessageContextMenuCommandInteraction
   : GuildMessageContextMenuCommandInteraction;
 
-export type GuildSelectMenuInteraction = GuildInteraction<SelectMenuInteraction>;
-export type SelectMenuInteractions = GuildSelectMenuInteraction | SelectMenuInteraction;
+export type GuildSelectMenuInteraction = GuildInteraction<AnySelectMenuInteraction>;
+export type SelectMenuInteractions = AnySelectMenuInteraction | GuildSelectMenuInteraction;
 export type PickSelectMenuInteraction<AllowedInDMs extends boolean> = AllowedInDMs extends true
-  ? SelectMenuInteraction
+  ? AnySelectMenuInteraction
   : GuildSelectMenuInteraction;
 
 export type GuildUserContextMenuCommandInteraction = GuildInteraction<UserContextMenuCommandInteraction>;
@@ -48,11 +48,12 @@ export type GuildNonModalInteractions = GuildButtonInteraction
 | GuildMessageContextMenuCommandInteraction
 | GuildSelectMenuInteraction
 | GuildUserContextMenuCommandInteraction;
-export type NonGuildNonModalInteractions = ButtonInteraction
+export type NonGuildNonModalInteractions = AnySelectMenuInteraction
+| ButtonInteraction
 | ChatInputCommandInteraction
 | MessageContextMenuCommandInteraction
-| SelectMenuInteraction
 | UserContextMenuCommandInteraction;
+
 export type NonModalInteractions = GuildNonModalInteractions | NonGuildNonModalInteractions;
 export type PickNonModalInteraction<AllowedInDMs extends boolean> = AllowedInDMs extends true
   ? NonGuildNonModalInteractions
