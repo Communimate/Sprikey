@@ -1,3 +1,4 @@
+name: Deploy
 on:
   pull_request:
     types: [closed]
@@ -11,8 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Print Branch
+      run: echo "${{ github.base_ref }}"
+
     - name: Deploy Production
-      if: github.base_ref == 'refs/heads/main'
+      if: github.base_ref == 'main'
       uses: wei/git-sync@v3
       with:
         source_repo: "https://github.com/${{ github.repository }}.git"
@@ -21,7 +25,7 @@ jobs:
         destination_branch: "master"
 
     - name: Deploy Development
-      if: github.base_ref == 'refs/heads/dev'
+      if: github.base_ref == 'dev'
       uses: wei/git-sync@v3
       with:
         source_repo: "https://github.com/${{ github.repository }}.git"
