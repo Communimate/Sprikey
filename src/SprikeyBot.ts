@@ -3,8 +3,6 @@ import { DiscordClient } from "./handlers/client/DiscordClient.js";
 import { ButtonHandler } from "./handlers/interaction/ButtonHandler.js";
 import { CommandHandler } from "./handlers/interaction/CommandHandler.js";
 import { ModalHandler } from "./handlers/interaction/ModalHandler.js";
-import { IntroductionService } from "./services/IntroductionService.js";
-import { GatekeepService } from "./services/GatekeepService.js";
 
 class BotClients {
   readonly discord: DiscordClient;
@@ -39,12 +37,8 @@ class BotInteractions {
 }
 
 class BotServices {
-  readonly gatekeep: GatekeepService;
-  readonly introduction: IntroductionService;
 
   constructor(bot: SprikeyBot) {
-    this.gatekeep = new GatekeepService(bot);
-    this.introduction = new IntroductionService(bot);
   }
 }
 

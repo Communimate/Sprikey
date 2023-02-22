@@ -12,9 +12,8 @@ const introductionButtonData = createButton({
   name: "introduction",
   allowInDMs: false,
   button: introductionButton,
-  async run(bot, context) {
-    return bot.services.introduction.requestDetailsUsing(context);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async run(_bot, _context) {}
 });
 
 export default introductionButtonData;
