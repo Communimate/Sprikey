@@ -26,10 +26,11 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --pretty --sourceMap --watch",
+    "rebuild": "rm -r tsconfig.tsbuildinfo dist; tsc",
     "lint": "eslint src/",
     "lint:commit": "git log -1 --pretty=format:'%B' | commitlint",
     "lint:fix": "eslint --fix src/",
-    "postinstall": "tsc",
+    "postinstall": "rm -r tsconfig.tsbuildinfo dist; tsc",
     "start": "node dist/index.js",
     "test": "echo 'Error: no test specified' && exit 1"
   },
