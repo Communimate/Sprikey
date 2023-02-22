@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Print Branch
-      run: echo "${{ github.base_ref }}"
-
     - name: Deploy Production
       if: github.base_ref == 'main'
       uses: wei/git-sync@v3
