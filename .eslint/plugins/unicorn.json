@@ -71,6 +71,7 @@
       "onlyCamelCase": false
     }],
     "unicorn/no-lonely-if": "error",
+    "unicorn/no-negated-condition": "error",
     "unicorn/no-nested-ternary": "error",
     "unicorn/no-new-array": "error",
     "unicorn/no-new-buffer": "error",
@@ -82,6 +83,7 @@
     "unicorn/no-static-only-class": "error",
     "unicorn/no-thenable": "error",
     "unicorn/no-this-assignment": "error",
+    "unicorn/no-typeof-undefined": "error",
     "unicorn/no-unreadable-array-destructuring": "error",
     "unicorn/no-unsafe-regex": "error",
     "unicorn/no-unused-properties": "error",
@@ -159,6 +161,7 @@
     "unicorn/prefer-reflect-apply": "error",
     "unicorn/prefer-regexp-test": "error",
     "unicorn/prefer-set-has": "error",
+    "unicorn/prefer-set-size": "error",
     "unicorn/prefer-spread": "error",
     "unicorn/prefer-string-replace-all": "error",
     "unicorn/prefer-string-slice": "error",
