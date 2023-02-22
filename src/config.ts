@@ -16,12 +16,10 @@ export const DISCORD_BOT_CONFIG = {
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.GuildIntegrations,
     GatewayIntentBits.GuildEmojisAndStickers,
-    GatewayIntentBits.GuildBans,
-    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.GuildModeration,
     GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageReactions
+    GatewayIntentBits.MessageContent
   ]
 };

@@ -3,10 +3,12 @@
 import type {
   CommandInteraction, InteractionReplyOptions, InteractionResponse, Message, BaseMessageOptions, MessagePayload
 } from "discord.js";
+import { ChannelType } from "discord.js";
 
 import type {
   RequiredInteractions, PickModalInteraction, PickButtonInteraction, PickCommandInteraction, PickNonModalInteraction
 } from "../types/CustomInteractions.js";
+import { isNullish } from "../utilities/nullishAssertion.js";
 import { BaseContext, BaseFormatter } from "./BaseContext.js";
 
 type ShowModalMethod = CommandInteraction[ "showModal" ];
@@ -33,7 +35,9 @@ export class DiscordBaseContext extends BaseContext {
   }
 
   override async send(options: BaseMessageOptions | MessagePayload | string): Promise<Message | undefined> {
-    return this.interaction.channel?.send(options);
+    if (isNullish(this.interaction.channel) || this.interaction.channel.type === ChannelType.GuildStageVoice) return;
+
+    return this.interaction.channel.send(options);
   }
 
   override async error(errorMessage: string): Promise<InteractionResponse> {

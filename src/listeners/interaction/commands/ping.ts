@@ -5,10 +5,7 @@ const pingCommand = createCommand({
   description: "Replies with 'Pong!'",
   allowInDMs: true,
   guildPermissions: PermissionFlags.SendMessages,
-  compatibility: {
-    discord: true,
-    twitch: true
-  },
+  compatibility: { discord: true },
   options: [],
   async run(_bot, context) {
     return context.reply("Pong!");
