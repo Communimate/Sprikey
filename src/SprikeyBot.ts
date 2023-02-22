@@ -3,6 +3,7 @@ import { DiscordClient } from "./handlers/client/DiscordClient.js";
 import { ButtonHandler } from "./handlers/interaction/ButtonHandler.js";
 import { CommandHandler } from "./handlers/interaction/CommandHandler.js";
 import { ModalHandler } from "./handlers/interaction/ModalHandler.js";
+import { ArtGalleryService } from "./services/ArtGalleryService.js";
 
 class BotClients {
   readonly discord: DiscordClient;
@@ -37,8 +38,10 @@ class BotInteractions {
 }
 
 class BotServices {
+  readonly artGallery: ArtGalleryService;
 
   constructor(bot: SprikeyBot) {
+    this.artGallery = new ArtGalleryService(bot);
   }
 }
 
