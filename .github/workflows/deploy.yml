@@ -2,6 +2,7 @@ on:
   pull_request:
     types: [closed]
     branches:
+      - main
       - dev
 
 jobs:
@@ -10,12 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy
-      uses: wei/git-sync@v1
-      env:
-        SOURCE_REPO: "https://github.com/${{ github.repository }}.git"
-        SOURCE_BRANCH: "${{ github.base_ref }}"
-        DESTINATION_REPO: ${{ secrets.SPRIKEYDEV_GIT_URL }}
-        DESTINATION_BRANCH: "master"
+    - name: Deploy Production
+      if: github.base_ref == 'refs/heads/main'
+      uses: wei/git-sync@v3
       with:
-        args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
+        source_repo: "https://github.com/${{ github.repository }}.git"
+        source_branch: "${{ github.base_ref }}"
+        destination_repo: ${{ secrets.SPRIKEY_GIT_URL }}
+        destination_branch: "master"
+
+    - name: Deploy Development
+      if: github.base_ref == 'refs/heads/dev'
+      uses: wei/git-sync@v3
+      with:
+        source_repo: "https://github.com/${{ github.repository }}.git"
+        source_branch: "${{ github.base_ref }}"
+        destination_repo: ${{ secrets.SPRIKEYDEV_GIT_URL }}
+        destination_branch: "master"
