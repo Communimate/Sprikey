@@ -19,6 +19,18 @@
     }, {
       "type": "node",
       "request": "launch",
+      "name": "Rebuild and Launch Program",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/dist/index.js",
+      "preLaunchTask": "npm: rebuild",
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
+    }, {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Program",
       "skipFiles": [
         "<node_internals>/**"
