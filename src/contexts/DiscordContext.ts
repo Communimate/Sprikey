@@ -6,7 +6,8 @@ import type {
 import { ChannelType } from "discord.js";
 
 import type {
-  RequiredInteractions, PickModalInteraction, PickButtonInteraction, PickCommandInteraction, PickNonModalInteraction
+  RequiredInteractions, PickModalInteraction, PickButtonInteraction, PickCommandInteraction,
+  PickNonModalInteraction, PickMessageContextMenuInteraction, PickUserContextMenuInteraction
 } from "../types/CustomInteractions.js";
 import { isNullish } from "../utilities/nullishAssertion.js";
 import { BaseContext, BaseFormatter } from "./BaseContext.js";
@@ -82,6 +83,24 @@ export class DiscordButtonContext<AllowedInDMs extends boolean> extends DiscordN
   override readonly interaction: PickButtonInteraction<AllowedInDMs>;
 
   constructor(interaction: PickButtonInteraction<AllowedInDMs>) {
+    super(interaction);
+    this.interaction = interaction;
+  }
+}
+
+export class DiscordUserMenuContext<AllowedInDMs extends boolean> extends DiscordNonModalContext<AllowedInDMs> {
+  override readonly interaction: PickUserContextMenuInteraction<AllowedInDMs>;
+
+  constructor(interaction: PickUserContextMenuInteraction<AllowedInDMs>) {
+    super(interaction);
+    this.interaction = interaction;
+  }
+}
+
+export class DiscordMessageMenuContext<AllowedInDMs extends boolean> extends DiscordNonModalContext<AllowedInDMs> {
+  override readonly interaction: PickMessageContextMenuInteraction<AllowedInDMs>;
+
+  constructor(interaction: PickMessageContextMenuInteraction<AllowedInDMs>) {
     super(interaction);
     this.interaction = interaction;
   }
