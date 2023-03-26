@@ -1,4 +1,4 @@
-import type { ContextMenuCommandBuilder, InteractionResponse } from "discord.js";
+import type { ContextMenuCommandBuilder, InteractionResponse, Message } from "discord.js";
 import type { DiscordMessageMenuContext, DiscordUserMenuContext } from "../contexts/DiscordContext.js";
 import type { SprikeyBot } from "../SprikeyBot.js";
 
@@ -6,7 +6,7 @@ export interface UserMenuTemplate<MenuName extends string = string, AllowedInDMs
   readonly name: MenuName;
   readonly allowInDMs: AllowedInDMs;
   readonly menu: ContextMenuCommandBuilder;
-  run(bot: SprikeyBot, context: DiscordUserMenuContext<AllowedInDMs>): Promise<InteractionResponse | void>;
+  run(bot: SprikeyBot, context: DiscordUserMenuContext<AllowedInDMs>): Promise<InteractionResponse | Message | void>;
 }
 
 export function createUserMenu<MenuName extends string, AllowedInDMs extends boolean>(

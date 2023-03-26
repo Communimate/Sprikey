@@ -70,6 +70,19 @@ export class DiscordBaseContext extends BaseContext {
 
     return this.interaction.editReply(options);
   }
+
+  async resolveMember(memberID: string): Promise<GuildMember | undefined> {
+    const members = this.interaction.guild?.members;
+    if (isNullish(members)) return;
+
+    return members.resolve(memberID) ?? await members.fetch(memberID);
+  }
+
+  async resolveActor(): Promise<GuildMember | undefined> {
+    if (isNullish(this.interaction.member)) return;
+
+    return this.resolveMember(this.interaction.member.user.id);
+  }
 }
 
 export class DiscordNonModalContext<AllowedInDMs extends boolean> extends DiscordBaseContext {
@@ -111,6 +124,10 @@ export class DiscordUserMenuContext<AllowedInDMs extends boolean> extends Discor
   constructor(interaction: PickUserContextMenuInteraction<AllowedInDMs>) {
     super(interaction);
     this.interaction = interaction;
+  }
+
+  async resolveTarget(): Promise<GuildMember | undefined> {
+    return this.resolveMember(this.interaction.targetId);
   }
 }
 
