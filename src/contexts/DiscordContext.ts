@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
 import type {
-  CommandInteraction, InteractionReplyOptions, InteractionResponse, Message, BaseMessageOptions, MessagePayload
+  CommandInteraction, InteractionReplyOptions, InteractionResponse, Message, BaseMessageOptions, MessagePayload, GuildMember
 } from "discord.js";
 import { ChannelType } from "discord.js";
 
@@ -22,8 +22,11 @@ class DiscordFormatter extends BaseFormatter {
   }
 }
 
+type ReplyOptions = InteractionReplyOptions | MessagePayload | string;
+
 export class DiscordBaseContext extends BaseContext {
   readonly interaction: RequiredInteractions;
+  deferer?: ReturnType<DeferReplyMethod>;
 
   constructor(interaction: RequiredInteractions) {
     const formatter = new DiscordFormatter();
@@ -31,8 +34,12 @@ export class DiscordBaseContext extends BaseContext {
     this.interaction = interaction;
   }
 
-  override async reply(options: InteractionReplyOptions | MessagePayload | string): Promise<InteractionResponse> {
-    return this.interaction.reply(options);
+  override async reply(options: ReplyOptions): Promise<InteractionResponse | Message> {
+    await this.deferer;
+
+    return isNullish(this.deferer)
+      ? this.interaction.reply(options)
+      : this.interaction.editReply(options);
   }
 
   override async send(options: BaseMessageOptions | MessagePayload | string): Promise<Message | undefined> {
@@ -41,18 +48,26 @@ export class DiscordBaseContext extends BaseContext {
     return this.interaction.channel.send(options);
   }
 
-  override async error(errorMessage: string): Promise<InteractionResponse> {
-    return this.interaction.reply({
+  override async error(errorMessage: string): Promise<InteractionResponse | Message> {
+    await this.deferer;
+
+    const replyOptions = {
       content: errorMessage,
       ephemeral: true
-    });
+    };
+
+    return isNullish(this.deferer)
+      ? this.interaction.reply(replyOptions)
+      : this.editReply(replyOptions);
   }
 
-  async deferReply(options?: Parameters<DeferReplyMethod>[ 0 ]): ReturnType<DeferReplyMethod> {
-    return this.interaction.deferReply(options);
+  deferReply(options?: Parameters<DeferReplyMethod>[ 0 ]): void {
+    this.deferer = this.interaction.deferReply(options);
   }
 
   async editReply(options: Parameters<EditReplyMethod>[ 0 ]): ReturnType<EditReplyMethod> {
+    await this.deferer;
+
     return this.interaction.editReply(options);
   }
 }
@@ -66,6 +81,8 @@ export class DiscordNonModalContext<AllowedInDMs extends boolean> extends Discor
   }
 
   async showModal(modal: Parameters<ShowModalMethod>[ 0 ]): ReturnType<ShowModalMethod> {
+    await this.deferer;
+
     return this.interaction.showModal(modal);
   }
 }

@@ -19,7 +19,7 @@ export abstract class BaseContext {
 
   abstract reply(
     options: MessagePayload | RequiredReplyOptions | string
-  ): Promise<InteractionResponse | SayReturnType | void>;
+  ): Promise<InteractionResponse | Message | SayReturnType | void>;
 
   abstract send(
     options: MessagePayload | RequiredMessageOptions | string
@@ -27,5 +27,5 @@ export abstract class BaseContext {
 
   abstract error(
     options: string
-  ): Promise<InteractionResponse | SayReturnType | void>;
+  ): Promise<InteractionResponse | Message | SayReturnType | void>;
 }
