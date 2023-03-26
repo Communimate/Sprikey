@@ -1,9 +1,16 @@
-import type { ButtonInteraction, ChatInputCommandInteraction, ModalSubmitInteraction } from "discord.js";
+import type {
+  ButtonInteraction, ChatInputCommandInteraction, MessageContextMenuCommandInteraction,
+  ModalSubmitInteraction, UserContextMenuCommandInteraction
+} from "discord.js";
 
 import type { SprikeyBot } from "../../../SprikeyBot.js";
 import { createDiscordListener } from "../../../types/DiscordTemplate.js";
-import { DiscordBaseContext, DiscordButtonContext, DiscordCommandContext } from "../../../contexts/DiscordContext.js";
+import {
+  DiscordBaseContext, DiscordButtonContext, DiscordCommandContext, DiscordMessageMenuContext, DiscordUserMenuContext
+} from "../../../contexts/DiscordContext.js";
 import { isNullish } from "../../../utilities/nullishAssertion.js";
+
+type MenuCommandInteractions = MessageContextMenuCommandInteraction | UserContextMenuCommandInteraction;
 
 function invokeButtonInteraction(bot: SprikeyBot, interaction: ButtonInteraction): void {
   const context = new DiscordButtonContext(interaction);
@@ -25,6 +32,14 @@ function invokeModalInteraction(bot: SprikeyBot, interaction: ModalSubmitInterac
   const context = new DiscordBaseContext(interaction);
   bot.interactions.modal.emitter.emit(customId, bot, context);
 }
+
+function invokeMenuInteraction(bot: SprikeyBot, interaction: MenuCommandInteractions): void {
+  const context = interaction.isUserContextMenuCommand()
+    ? new DiscordUserMenuContext(interaction)
+    : new DiscordMessageMenuContext(interaction);
+
+  bot.interactions.menu.emitter.emit(`${interaction.commandName}-${interaction.type}`, bot, context);
+}
 const discordInteractionCreate = createDiscordListener({
   name: "interactionCreate",
   runOnce: false,
@@ -32,6 +47,7 @@ const discordInteractionCreate = createDiscordListener({
     if (interaction.isButton()) invokeButtonInteraction(bot, interaction);
     else if (interaction.isChatInputCommand()) invokeSlashCommandInteraction(bot, interaction);
     else if (interaction.isModalSubmit()) invokeModalInteraction(bot, interaction);
+    else if (interaction.isContextMenuCommand()) invokeMenuInteraction(bot, interaction);
   }
 });
 

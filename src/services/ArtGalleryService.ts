@@ -71,7 +71,8 @@ export class ArtGalleryService {
   }
 
   async getArtGalleryChannel(): Promise<ServiceResponse<TextChannel>> {
-    const introductionChannel = await this.bot.clients.discord.emitter.channels.fetch(ART_GALLERY_CHANNEL_ID);
+    const channels = this.bot.clients.discord.emitter.channels;
+    const introductionChannel = channels.resolve(ART_GALLERY_CHANNEL_ID) ?? await channels.fetch(ART_GALLERY_CHANNEL_ID);
     const isNotTextChannel = isNullish(introductionChannel) || introductionChannel.type !== ChannelType.GuildText;
     if (isNotTextChannel) return new ServiceError("Missing Art Gallery channel!");
 

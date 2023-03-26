@@ -7,6 +7,7 @@ import type { ButtonTemplate } from "../types/ButtonTemplate.js";
 import type { CommandTemplate } from "../types/CommandTemplate.js";
 import type { DiscordTemplate } from "../types/DiscordTemplate.js";
 import type { ModalTemplate } from "../types/ModalTemplate.js";
+import type { MessageMenuTemplate, UserMenuTemplate } from "../types/MenuTemplate.js";
 
 interface ClientListenerTemplates {
   discord: DiscordTemplate;
@@ -15,6 +16,7 @@ interface ClientListenerTemplates {
 interface InteractionListenerTemplates {
   buttons: ButtonTemplate;
   commands: CommandTemplate;
+  menus: MessageMenuTemplate | UserMenuTemplate;
   modals: ModalTemplate;
 }
 
@@ -30,6 +32,7 @@ const listenerType: Record<ClientListenerNames | InteractionListenerNames, "clie
   buttons: "interaction",
   commands: "interaction",
   discord: "client",
+  menus: "interaction",
   modals: "interaction"
 };
 
