@@ -1,3 +1,7 @@
+import type { RESTPostAPIContextMenuApplicationCommandsJSONBody } from "discord.js";
+import type { DiscordCommandTemplate } from "./types/CommandTemplate.js";
+
+import { Routes } from "discord.js";
 import { DISCORD_BOT_TOKEN } from "./config.js";
 import { DiscordClient } from "./handlers/client/DiscordClient.js";
 import { ButtonHandler } from "./handlers/interaction/ButtonHandler.js";
@@ -6,6 +10,8 @@ import { MenuHandler } from "./handlers/interaction/MenuHandler.js";
 import { ModalHandler } from "./handlers/interaction/ModalHandler.js";
 import { ArtGalleryService } from "./services/ArtGalleryService.js";
 import { RolebanService } from "./services/RolebanService.js";
+
+type APICommand = DiscordCommandTemplate | RESTPostAPIContextMenuApplicationCommandsJSONBody;
 
 class BotClients {
   readonly discord: DiscordClient;
@@ -16,6 +22,11 @@ class BotClients {
 
   async instantiateAll(): Promise<void> {
     await this.discord.loadAndRegisterListeners();
+  }
+
+  async registerCommands(commands: APICommand[]): Promise<void> {
+    await this.discord.rest
+      .put(Routes.applicationCommands(this.discord.applicationID), { body: commands });
   }
 }
 
@@ -39,6 +50,10 @@ class BotInteractions {
       this.menu.loadAndRegisterListeners(),
       this.modal.loadAndRegisterListeners()
     ]);
+  }
+
+  getCommands(): APICommand[] {
+    return [ ...this.command.commands, ...this.menu.menus ];
   }
 }
 
@@ -68,6 +83,7 @@ export class SprikeyBot {
       this.clients.instantiateAll(),
       this.interactions.instantiateAll()
     ]);
+    await this.clients.registerCommands(this.interactions.getCommands());
     await this.clients.discord.emitter.login(DISCORD_BOT_TOKEN);
 
     return this;

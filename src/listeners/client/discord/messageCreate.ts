@@ -7,7 +7,7 @@ const DIBS_PATTERN = /^\s*dibs\s*$/ui;
 const discordMessageCreate = createDiscordListener({
   name: "messageCreate",
   runOnce: false,
-  run(bot, message) {
+  async run(bot, message) {
     if (message.author.bot) return;
 
     const invalidDibs = isInvalidDibs(message);
