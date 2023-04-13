@@ -1,4 +1,4 @@
-import type { InteractionResponse, ModalBuilder } from "discord.js";
+import type { InteractionResponse, Message, ModalBuilder } from "discord.js";
 
 import type { DiscordModalContext } from "../contexts/DiscordContext.js";
 import type { SprikeyBot } from "../SprikeyBot.js";
@@ -7,7 +7,7 @@ export interface ModalTemplate<ModalName extends string = string, AllowedInDMs e
   readonly name: ModalName;
   readonly allowInDMs: AllowedInDMs;
   readonly modal: ModalBuilder;
-  run(bot: SprikeyBot, context: DiscordModalContext<AllowedInDMs>): Promise<InteractionResponse | void>;
+  run(bot: SprikeyBot, context: DiscordModalContext<AllowedInDMs>): Promise<InteractionResponse | Message | void>;
 }
 
 export function createModal<ModalName extends string, AllowedInDMs extends boolean>(
