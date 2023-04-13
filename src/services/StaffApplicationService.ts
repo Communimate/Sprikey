@@ -36,7 +36,7 @@ export class StaffApplicationService {
   async getStaffChannel(): Promise<ServiceResponse<TextChannel>> {
     const channels = this.bot.clients.discord.emitter.channels;
     const staffApplicationChannel = channels.resolve(STAFF_APPLICATION_CHANNEL_ID)
-      ?? (await channels.fetch(STAFF_APPLICATION_CHANNEL_ID));
+      ?? await channels.fetch(STAFF_APPLICATION_CHANNEL_ID);
     const isNotTextChannel = isNullish(staffApplicationChannel) || staffApplicationChannel.type !== ChannelType.GuildText;
     if (isNotTextChannel) return new ServiceError("I was unable to find the mod channel!");
 
