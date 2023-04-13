@@ -405,9 +405,6 @@
         "ignoreParameters": false,
         "ignoreProperties": false
       }],
-      "@typescript-eslint/no-invalid-this": [ "error", {
-        "capIsConstructor": false
-      }],
       "@typescript-eslint/no-invalid-void-type": [ "off", {
         "allowInGenericTypeArguments": true,
         "allowAsThisParameter": false
